@@ -13,7 +13,38 @@ php artisan make:job SendMail
 php artisan queue:work
 
 5、其他控制器中调用队列,延迟10秒执行
-\App\Jobs\SendMail::dispatch()->delay(10);
+\App\Jobs\SendMail::dispatch($data)->onConnection('edm')->onQueue('email')->delay(10);
 
 6、安装predis扩展
 composer require predis/predis ^1.1
+```
+config/queue.php配置
+
+    'redis' => [
+            'driver' => 'redis',
+            'connection' => 'default',
+            'queue' => env('REDIS_QUEUE', 'default'),
+            'retry_after' => 2,
+            'block_for' => null,
+        ],
+     'edm' => [
+            'driver' => 'redis',
+            'connection' => 'default',
+            'queue' => ['default','email'],
+            'retry_after' => 2,
+            'block_for' => 12,
+        ]
+```
+
+官方自带的队列监听扩展：laravel horizon
+安装：
+1、composer require laravel/horizon
+2、php artisan vendor:publish --provider="Laravel\Horizon\HorizonServiceProvider"
+运行：
+php artisan horizon
+查看：站点域名/horizon
+
+其他命令：
+暂停：php artisan horizon:pause
+继续 php artisan horizon:continue
+执行完所有任务后退出 php artisan horizon:terminate
