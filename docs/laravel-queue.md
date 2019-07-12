@@ -10,8 +10,10 @@ php artisan make:job SendMail
 3、在SendMail中的handle方法中编写队列任务
 
 4、启动队列监听
+```
 php artisan queue:work（此命令针对的是默认连接，若自定义连接和队列名需指定）
 php artisan queue:work --queue=email(指定监听队列email)
+```
 
 5、其他控制器中调用队列,延迟10秒执行
 \App\Jobs\SendMail::dispatch($data)->onConnection('edm')->onQueue('email')->delay(10);
