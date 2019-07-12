@@ -40,14 +40,20 @@ config/queue.php配置
 ```
 
 官方自带的队列监听扩展：laravel horizon
+```
 安装：
 1、composer require laravel/horizon
 2、php artisan vendor:publish --provider="Laravel\Horizon\HorizonServiceProvider"
+```
+```
 运行：
 php artisan horizon
 查看：站点域名/horizon
+```
 
 其他命令：
+```
 暂停：php artisan horizon:pause
 继续 php artisan horizon:continue
 执行完所有任务后退出 php artisan horizon:terminate
+```
