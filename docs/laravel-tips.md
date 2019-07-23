@@ -9,4 +9,7 @@ base64_encode对字符串加密
 	$code=mb_detect_encoding(base64_decode($str), array("ASCII",'UTF-8',"GB2312","GBK",'BIG5'));//判断当前字符串的编码格式，不存在即false
 	mb_convert_encoding(base64_decode($str), 'UTF-8', $oldcode);//将字符串由原来的编码格式转为UTF-8，第三个参数可以不写
 ```
-    
+ emoji解密后为UTF-8格式，其他字符串解密后为非UTF-8格式，所以统一转为UTF-8   
+```
+mb_convert_encoding(base64_decode($str), 'UTF-8');
+```
