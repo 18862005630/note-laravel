@@ -13,3 +13,8 @@ base64_encode对字符串加密
 ```
 mb_convert_encoding(base64_decode($str), 'UTF-8');
 ```
+
+
+#### stripslashes
+过滤json数据中的转义字符\
+$data=stripslashes($data);
