@@ -18,3 +18,18 @@ mb_convert_encoding(base64_decode($str), 'UTF-8');
 #### stripslashes
 过滤json数据中的转义字符\
 $data=stripslashes($data);
+
+
+#### 前端脚本
+1 勾勒页面标签结构（外框描绘，结构清晰）
+```
+javascript: (function() { var elements = document.body.getElementsByTagName('*'); var items = []; for (var i = 0; i < elements.length; i++) { if (elements[i].innerHTML.indexOf('html * { outline: 1px solid red }') != -1) { items.push(elements[i]); } } if (items.length > 0) { for (var i = 0; i < items.length; i++) { items[i].innerHTML = ''; } } else { document.body.innerHTML += '<style>html * { outline: 1px solid red }</style>'; } })();
+```
+1 勾勒页面标签结构(标签背景色描绘，好看但不清晰)
+```
+javascript: (function() { var css = document.createElement("style"); css.innerHTML = `* { background-color: rgba(255,0,0,.2); } * * { background-color: rgba(0,255,0,.2); } * * * { background-color: rgba(0,0,255,.2); } * * * * { background-color: rgba(255,0,255,.2); } * * * * * { background-color: rgba(0,255,255,.2); } * * * * * * { background-color: rgba(255,255,0,.2); } * * * * * * * { background-color: rgba(255,0,0,.2); } * * * * * * * * { background-color: rgba(0,255,0,.2); } * * * * * * * * * { background-color: rgba(0,0,255,.2); } * * * * * * * * * * { background-color: rgba(0,0,255,.2); } `; document.querySelector("head").appendChild(css); })();
+```
+1 git历史记录查看（新开页面，以轮播形式查看历史记录）
+```
+javascript: (function() { var url = window.location.href; var regEx = /^(https?\:\/\/)(www\.)?(github|gitlab|bitbucket)\.(com|org)\/(.*)$/i; if (regEx.test(url)) { url = url.replace(regEx, "$1$3.githistory.xyz/$5"); window.open(url, "_blank"); } else { alert("Not a Git File URL"); } })();
+```
